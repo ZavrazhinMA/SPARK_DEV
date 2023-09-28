@@ -15,7 +15,7 @@ PS: чем больше будет количество опытов в пунк
 Используйте только стандартные библиотеки из базового набора
    */
 
-  case class Experiment(box: List[Int]) {
+  class Experiment(val box: List[Int]) {
     def experimentSample2(): Boolean = {
       val take2 = Random.shuffle(box.sorted(Ordering.Int.reverse).init).take(2)
 //      вероятность что первым достанут черный а вторым белый
@@ -29,7 +29,7 @@ PS: чем больше будет количество опытов в пунк
   }
   val expQuantity = 100000
   val box = List( 0, 1, 1, 0, 1, 0)
-  val expTimesN = List.fill(expQuantity)(Experiment(box))
+  val expTimesN = List.fill(expQuantity)(new Experiment(box))
   val expResults = expTimesN
     .map(x => x.experimentSample2())
     .groupBy(x => x)
