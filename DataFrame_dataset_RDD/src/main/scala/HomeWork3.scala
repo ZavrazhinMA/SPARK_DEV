@@ -39,21 +39,20 @@ Parquet (src/main/resources/data/yellow_taxi_jan_25_2018).
                       total_amount: Double,
                      )
 
-  object TaxiInfo {
-    val taxiDf: Dataset[TaxiInfo] = spark.read
-      .format("parquet")
-      .load("src/main/res/yellow_taxi_jan_25_2018").as[TaxiInfo]
-  }
 
-  val result = TaxiInfo.taxiDf
-    .withColumn("date_day", date_format(col("tpep_pickup_datetime"), "dd-MM-yyyy"))
-    .groupBy("date_day")
+  val taxiDf: Dataset[TaxiInfo] = spark.read
+    .format("parquet")
+    .load("src/main/res/yellow_taxi_jan_25_2018").as[TaxiInfo]
+
+
+  val result = taxiDf
+    .groupBy(date_format('tpep_pickup_datetime , "dd-MM-yyyy").as("date"))
     .agg(
-      round(sum(col("trip_distance")), 2).as("total_day_distance"),
-      round(mean(col("trip_distance")), 2).as("mean_day_distance"),
-      round(max(col("trip_distance")), 2).as("max_day_distance"),
-      round(min(col("trip_distance")), 2).as("min_day_distance"),
-      round(stddev(col("trip_distance")), 2).as("stddev_day_distance")
+      round(sum('trip_distance), 2).as("total_day_distance"),
+      round(mean('trip_distance), 2).as("mean_day_distance"),
+      round(max('trip_distance), 2).as("max_day_distance"),
+      round(min('trip_distance), 2).as("min_day_distance"),
+      round(stddev('trip_distance), 2).as("stddev_day_distance")
     )
     .cache()
 
