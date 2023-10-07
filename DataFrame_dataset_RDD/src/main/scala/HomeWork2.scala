@@ -31,6 +31,7 @@ object HomeWork2 extends App with SparkSessionWrapper {
                       improvement_surcharge: Double,
                       total_amount: Double,
                      )
+
   val data_time = spark.read
     .format("parquet")
     .load("src/main/res/yellow_taxi_jan_25_2018").as[TaxiInfo]
@@ -46,8 +47,5 @@ object HomeWork2 extends App with SparkSessionWrapper {
 
   result.saveAsTextFile("src/main/res/result")
   result.foreach(println)
-
-
-
 
 }

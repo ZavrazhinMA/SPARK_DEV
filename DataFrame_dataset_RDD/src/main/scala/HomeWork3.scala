@@ -38,6 +38,7 @@ Parquet (src/main/resources/data/yellow_taxi_jan_25_2018).
                       improvement_surcharge: Double,
                       total_amount: Double,
                      )
+
   object TaxiInfo {
     val taxiDf: Dataset[TaxiInfo] = spark.read
       .format("parquet")
