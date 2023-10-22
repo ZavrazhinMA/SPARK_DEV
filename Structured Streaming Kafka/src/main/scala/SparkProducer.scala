@@ -27,7 +27,7 @@ object SparkProducer extends App with SparkSessionWrapper {
     .write
     .format("kafka")
     .option("kafka.bootstrap.servers", "localhost:9092")
-    .option("topic", "books1")
+    .option("topic", "books")
     .option("checkpointLocation", "src/main/scala/source")
     .save()
 
