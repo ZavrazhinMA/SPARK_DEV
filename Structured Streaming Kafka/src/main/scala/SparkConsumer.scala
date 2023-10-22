@@ -13,7 +13,6 @@ object SparkConsumer extends App with SparkSessionWrapper {
     .option("endingOffsets", "latest")
     .load()
     .selectExpr("CAST(value as STRING)")
-    .toDF
     .as[String]
 
 
