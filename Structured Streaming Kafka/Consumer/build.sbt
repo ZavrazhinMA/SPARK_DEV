@@ -4,7 +4,6 @@ ThisBuild / scalaVersion := "2.13.12"
 ThisBuild / version := "LATEST"
 
 scalacOptions ++= Seq("-target:jvm-11")
-//lazy val sparkVersion = "3.5.0"
 
 lazy val root = (project in file("."))
   .settings(

@@ -25,7 +25,7 @@ object SparkConsumer extends App with SparkSessionWrapper {
     .selectExpr("CAST(value as STRING)")
     .withColumn("jsonData", explode(from_json(col("value"), schema)))
     .select("jsonData.*")
-    .filter($"Rating" >=4)
+    .filter($"Rating" >= 4)
 
   jsonStream
     .writeStream
